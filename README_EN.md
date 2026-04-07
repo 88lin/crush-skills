@@ -69,6 +69,16 @@ In Claude Code, type:
 | `/{slug}-memory` | Memory mode |
 | `/{slug}-persona` | Persona mode |
 | `/delete-crush {slug}` | Delete |
+| `/let-go {slug}` | Gentle delete |
+
+### Crush-Specific Features
+
+| Command | Description |
+|---------|-------------|
+| `/confess` | Confession simulator - simulate how they would respond |
+| `/date` | Date simulator - predict their behavior on a date |
+| `/progress` | Track relationship progression stage |
+| `/analyze` | Psychological analysis of your crush |
 
 ---
 
@@ -128,20 +138,24 @@ Xiaomei: Depends, I've been busy lately
 crush/
 ├── SKILL.md                    # Main skill file
 ├── prompts/
-│   ├── intake.md              # Info collection guide
-│   ├── memory_builder.md     # Relationship memory template
-│   ├── memory_analyzer.md    # Relationship memory analyzer
-│   ├── persona_builder.md    # Persona template
-│   ├── persona_analyzer.md   # Personality behavior analyzer
-│   ├── merger.md             # Incremental merge logic
-│   └── correction_handler.md # Conversation correction handler
+│   ├── intake.md               # Info collection guide
+│   ├── memory_builder.md       # Relationship memory template
+│   ├── memory_analyzer.md      # Relationship memory analyzer
+│   ├── persona_builder.md      # Persona template
+│   ├── persona_analyzer.md     # Personality behavior analyzer
+│   ├── merger.md               # Incremental merge logic
+│   ├── correction_handler.md  # Conversation correction handler
+│   ├── confession_simulator.md # Confession simulator
+│   ├── date_simulator.md       # Date simulator
+│   ├── progression_tracker.md  # Progression tracker
+│   └── crush_analyzer.md       # Psychological analyzer
 └── tools/
-    ├── wechat_parser.py      # WeChat chat log parser
-    ├── qq_parser.py          # QQ chat log parser
-    ├── social_parser.py      # Social media parser
-    ├── photo_analyzer.py    # Photo EXIF analyzer
-    ├── version_manager.py   # Version management/rollback
-    └── skill_writer.py      # Skill file manager
+    ├── wechat_parser.py        # WeChat chat log parser
+    ├── qq_parser.py            # QQ chat log parser
+    ├── social_parser.py        # Social media parser
+    ├── photo_analyzer.py       # Photo EXIF analyzer
+    ├── version_manager.py      # Version management/rollback
+    └── skill_writer.py         # Skill file manager
 ```
 
 ---

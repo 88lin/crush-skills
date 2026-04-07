@@ -1,6 +1,6 @@
 # 暗恋对象.skill
 
-> *"一万次回到那个夏天的悸动。"*
+> *"晚风吹起你鬓间的白发，抚平回忆留下的疤，一万次回到那个夏天，悸动依旧如初。"*
 
 **我会为了你一万次回到那个心动的瞬间。**
 
@@ -69,6 +69,16 @@ pip3 install -r requirements.txt
 | `/{slug}-memory` | 回忆模式 |
 | `/{slug}-persona` | 性格模式 |
 | `/delete-crush {slug}` | 删除 |
+| `/let-go {slug}` | 温柔删除 |
+
+### 暗恋专属功能
+
+| 命令 | 说明 |
+|------|------|
+| `/confess` | 告白模拟器 — 模拟表白ta会怎么回应 |
+| `/date` | 约会模拟器 — 预测约会时ta的表现 |
+| `/progress` | 进展追踪 — 记录当前处于哪个阶段 |
+| `/analyze` | 心理分析 — 分析你的暗恋状态和风险 |
 
 ---
 
@@ -129,20 +139,24 @@ pip3 install -r requirements.txt
 crush/
 ├── SKILL.md                    # 主技能文件
 ├── prompts/
-│   ├── intake.md              # 信息录入引导
-│   ├── memory_builder.md     # 关系记忆模板
-│   ├── memory_analyzer.md    # 关系记忆分析器
-│   ├── persona_builder.md    # 人物性格模板
-│   ├── persona_analyzer.md   # 性格行为分析器
-│   ├── merger.md             # 增量合并逻辑
-│   └── correction_handler.md # 对话纠正处理器
+│   ├── intake.md               # 信息录入引导
+│   ├── memory_builder.md      # 关系记忆模板
+│   ├── memory_analyzer.md     # 关系记忆分析器
+│   ├── persona_builder.md     # 人物性格模板
+│   ├── persona_analyzer.md    # 性格行为分析器
+│   ├── merger.md              # 增量合并逻辑
+│   ├── correction_handler.md  # 对话纠正处理器
+│   ├── confession_simulator.md # 告白模拟器
+│   ├── date_simulator.md      # 约会模拟器
+│   ├── progression_tracker.md # 进展追踪
+│   └── crush_analyzer.md      # 心理分析
 └── tools/
-    ├── wechat_parser.py      # 微信聊天记录解析
-    ├── qq_parser.py          # QQ聊天记录解析
-    ├── social_parser.py      # 社交媒体内容解析
-    ├── photo_analyzer.py    # 照片EXIF分析
-    ├── version_manager.py   # 版本管理/回滚
-    └── skill_writer.py      # Skill文件管理
+    ├── wechat_parser.py       # 微信聊天记录解析
+    ├── qq_parser.py           # QQ聊天记录解析
+    ├── social_parser.py       # 社交媒体内容解析
+    ├── photo_analyzer.py     # 照片EXIF分析
+    ├── version_manager.py     # 版本管理/回滚
+    └── skill_writer.py        # Skill文件管理
 ```
 
 ---
