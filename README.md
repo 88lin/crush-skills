@@ -231,6 +231,11 @@ crush/
 如果你也有关于暗恋的故事，欢迎分享。
 
 ---
+## 衍生作品
+- **[crush-cupid智能agent](https://github.com/xiaoheizi8/crush-cupid)**（by xiaohezi8）—把暗恋蒸馏成 AI 引擎 —— 通过 GitHub 远端的 Skill，生成一个真正像 ta 的智能 agent。
+
+
+---
 
 ## 💡 致正在看文档的你
 
