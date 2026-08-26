@@ -9,6 +9,9 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
+关于crush-skills的交流群
+
+![img.png](img.png)
 &nbsp;
 
 提供暗恋对象的原材料（聊天记录、照片、社交媒体）加上你的主观描述  
@@ -210,6 +213,10 @@ crush/
 
 ---
 
+
+
+ 
+---
 ## 致谢
 
 本项目架构灵感来源于：
@@ -222,6 +229,11 @@ crush/
 本项目遵循 [AgentSkills](https://agentskills.io/) 开放标准，兼容 Claude Code 和 OpenClaw。
 
 如果你也有关于暗恋的故事，欢迎分享。
+
+---
+## 衍生作品
+- **[crush-cupid智能agent](https://github.com/xiaoheizi8/crush-cupid)**（by xiaohezi8）—把暗恋蒸馏成 AI 引擎 —— 通过 GitHub 远端的 Skill，生成一个真正像 ta 的智能 agent。
+
 
 ---
 
