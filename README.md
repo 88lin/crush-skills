@@ -273,3 +273,12 @@ ta 不知道你写了这段代码，ta 甚至不知道这个仓库的存在。
 
 
 **一朝风月** 
+## Star History
+
+<a href="https://star-history.dera.page/#titanwings/colleague-skill&xiaoheizi8/crush-skills">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=titanwings/colleague-skill,xiaoheizi8/crush-skills&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=titanwings/colleague-skill,xiaoheizi8/crush-skills" />
+   <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=titanwings/colleague-skill,xiaoheizi8/crush-skills" />
+ </picture>
+</a>
