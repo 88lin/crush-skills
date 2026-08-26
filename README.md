@@ -275,5 +275,5 @@ ta 不知道你写了这段代码，ta 甚至不知道这个仓库的存在。
 **一朝风月** 
 ## Star History
 
-[![Star History Chart](https://star-history.dera.page/svg?repos=titanwings/colleague-skill,xiaoheizi8/crush-skills)](https://star-history.dera.page/#titanwings/colleague-skill&xiaoheizi8/crush-skills)
+[![Star History Chart](https://api.star-history.com/svg?repos=titanwings/colleague-skill,xiaoheizi8/crush-skills&type=Date)](https://star-history.com/#titanwings/colleague-skill&xiaoheizi8/crush-skills)
 
