@@ -275,4 +275,4 @@ ta 不知道你写了这段代码，ta 甚至不知道这个仓库的存在。
 **一朝风月** 
 ## Star History
 
-[![Warpchart](https://warpchart.dev/r/xiaoheizi8/crush-skills.svg)](https://warpchart.dev/r/xiaoheizi8/crush-skills)
+[![RepoStars](https://repostars.dev/api/embed?repo=xiaoheizi8/crush-skills)](https://repostars.dev/?repos=xiaoheizi8/crush-skills)
