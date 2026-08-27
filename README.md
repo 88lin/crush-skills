@@ -9,8 +9,8 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
-**新项目crush-cupid**
-[[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)](https://github.com/xiaoheizi8/crush-cupid)
+**新agent项目对接 crush-skills的crush-cupid**
+[[![crush-cupid](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)](https://github.com/xiaoheizi8/crush-cupid)
 
 关于crush-skills的交流群
 
