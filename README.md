@@ -9,6 +9,9 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
+**新agent项目对接 crush-skills的crush-cupid**
+[[![crush-cupid]](https://github.com/xiaoheizi8/crush-cupid)
+
 关于crush-skills的交流群
 
 ![img.png](img.png)
@@ -273,3 +276,6 @@ ta 不知道你写了这段代码，ta 甚至不知道这个仓库的存在。
 
 
 **一朝风月** 
+## Star History
+
+[![RepoStars](https://repostars.dev/api/embed?repo=xiaoheizi8/crush-skills)](https://repostars.dev/?repos=xiaoheizi8/crush-skills)
