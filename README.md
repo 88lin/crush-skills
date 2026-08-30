@@ -9,6 +9,11 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
+
+![Powered by OrcaRouter](https://img.shields.io/badge/Powered_by-OrcaRouter-2563eb)
+> 💡 **推广**：本工具由 [OrcaRouter](https://www.orcarouter.ai/ref/ref_18b07a7c594033c5f754)  赞助支持OrcaRouter 是一个强大的 AI 路由引擎，能智能调度最合适的 AI 模型处理您的任务。点击上方链接了解详情
+
+
 ## 🏹 姊妹项目 · crush-cupid
 
 > *"每一支射出的箭，都是一次未说出口的喜欢。"*
