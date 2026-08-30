@@ -9,10 +9,26 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
-**新agent项目对接 crush-skills的crush-cupid**
-[[![crush-cupid]](https://github.com/xiaoheizi8/crush-cupid)
+## 🏹 姊妹项目 · crush-cupid
 
-关于crush-skills的交流群
+> *"每一支射出的箭，都是一次未说出口的喜欢。"*
+>
+> [**crush-cupid**](https://github.com/xiaoheizi8/crush-cupid) 是 crush-skills 的 **Java 全栈 Web 版**：把暗恋蒸馏成可对话的 AI 引擎，在浏览器里像聊微信一样和 ta 说话——会秒回、会发表情包、会主动找你，还有一条专属于 ta 的声线。
+>
+> [![Java 17](https://img.shields.io/badge/Java-17-blue)](https://www.oracle.com/java/)
+> [![Spring Boot 3.5](https://img.shields.io/badge/Spring%20Boot-3.5-green)](https://spring.io/projects/spring-boot)
+> [![Spring AI](https://img.shields.io/badge/Spring%20AI-1.1-purple)](https://spring.io/projects/spring-ai)
+> [![DeepSeek](https://img.shields.io/badge/DeepSeek-chat-orange)](https://www.deepseek.com/)
+> [![通义千问](https://img.shields.io/badge/%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE-DashScope-blue)](https://dashscope.aliyun.com/)
+> [![Vue 3](https://img.shields.io/badge/Vue-3-brightgreen)](https://vuejs.org/)
+> [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4479a1)](https://www.postgresql.org/)
+>
+> **→ [前往 crush-cupid 仓库](https://github.com/xiaoheizi8/crush-cupid)** · 完整功能介绍见文末「衍生作品」
+![img_1.png](img_1.png)
+> ![img_2.png](img_2.png)
+---
+
+📣 **关于 crush-skills 的交流群：**
 
 ![img.png](img.png)
 &nbsp;
@@ -87,6 +103,22 @@ pip3 install -r requirements.txt
 | `/progress` | 进展追踪 — 记录当前处于哪个阶段 |
 | `/analyze` | 心理分析 — 分析你的暗恋状态和风险 |
 
+### 军师模式（Advisor Mode）
+
+> 模拟模式 = 你和 ta 说话（虚拟互动）｜军师模式 = 军师帮你分析怎么和 ta 说话（现实策略）
+
+帮助用户从「依赖 AI 模拟」走向「在现实中行动」，充当虚拟与现实的桥梁。毒舌但靠谱，直球不绕弯，不灌鸡汤。
+
+| 命令 | 说明 |
+|------|------|
+| `/advisor` | 进入军师模式，自由咨询 |
+| `/advisor report` | 关系报告 — 整合聊天记录、互动频率、信号分析 |
+| `/advisor strategy` | 策略制定 — 基于当前阶段推荐下一步行动 |
+| `/advisor prep` | 行动前准备 — 话题清单、雷区提醒、穿搭建议 |
+| `/advisor analyze` | 互动复盘 — 贴入聊天记录，军师解读对方信号 |
+| `/advisor confession` | 告白规划 — 时机、方式、话术、备选方案 |
+| `/advisor reality` | 现实检验 — 客观评估暗恋健康度，防止过度沉溺 |
+
 ---
 
 ## 效果示例
@@ -156,7 +188,14 @@ crush/
 │   ├── confession_simulator.md # 告白模拟器
 │   ├── date_simulator.md      # 约会模拟器
 │   ├── progression_tracker.md # 进展追踪
-│   └── crush_analyzer.md      # 心理分析
+│   ├── crush_analyzer.md      # 心理分析
+│   ├── advisor.md             # 军师模式主入口（人设 + 自由咨询）
+│   ├── advisor_report.md      # 关系报告
+│   ├── advisor_strategy.md    # 策略制定
+│   ├── advisor_prep.md        # 行动前准备
+│   ├── advisor_analyze.md     # 互动复盘
+│   ├── advisor_confession.md  # 告白规划
+│   └── advisor_reality.md     # 现实检验
 └── tools/
     ├── wechat_parser.py       # 微信聊天记录解析
     ├── qq_parser.py           # QQ聊天记录解析
@@ -235,7 +274,39 @@ crush/
 
 ---
 ## 衍生作品
-- **[crush-cupid智能agent](https://github.com/xiaoheizi8/crush-cupid)**（by xiaohezi8）—把暗恋蒸馏成 AI 引擎 —— 通过 GitHub 远端的 Skill，生成一个真正像 ta 的智能 agent。
+
+### 🏹 crush-cupid · 把暗恋装进 Web
+
+> *"每一支射出的箭，都是一次未说出口的喜欢。"*
+>
+> [**crush-cupid**](https://github.com/xiaoheizi8/crush-cupid)（by [xiaoheizi8](https://github.com/xiaoheizi8)）— 把暗恋蒸馏成 AI 引擎：通过 GitHub 远端的 Skill，生成一个真正像 ta 的智能 agent。
+
+crush-skills 的 **Java 全栈 Web 实现**。后端从 GitHub Raw 拉取 `SKILL.md` + `prompts/*.md` 提示词，驱动多供应商 LLM；前端用微信式气泡，渲染每一次心动。
+
+| 功能亮点 | 说明 |
+|---------|------|
+| 🔌 Skill 远程拉取 | GitHub Raw 拉取提示词模板，TTL 本地缓存 |
+| 🧠 多 LLM 路由 | DeepSeek / 通义千问 / OpenAI 可按 `provider` 一键切换 |
+| 🗨️ 微信式连发 | 回复自动切分为多条短消息，还原真实聊天节奏 |
+| 😂 智能表情包 | 按情绪自动配图（ChineseBQB 素材库 + jsdelivr CDN） |
+| 📷 多模态 + OCR | 图片对话、聊天截图自动识别文字（百炼通用 OCR） |
+| 🎤 专属声线 | CosyVoice 声音设计，为 ta 生成独一无二的声音 |
+| ⏰ 主动消息 | 「等 ta 主动找我」一键触发，SSE 心跳保活推送 |
+| 💾 对话记忆库 | PostgreSQL 持久化，刷新/重启后历史不丢 |
+| 🧬 Persona 建模 | 5 层人格模型：硬规则 → 身份 → 话风 → 情感 → 行为 |
+
+**技术栈**：Java 17 · Spring Boot 3.5 · Spring AI 1.1.2 · Spring AI Alibaba · MyBatis-Plus · PostgreSQL · Vue 3 + Ant Design Vue
+
+[![Java 17](https://img.shields.io/badge/Java-17-blue)](https://www.oracle.com/java/)
+[![Spring Boot 3.5](https://img.shields.io/badge/Spring%20Boot-3.5-green)](https://spring.io/projects/spring-boot)
+[![Spring AI](https://img.shields.io/badge/Spring%20AI-1.1-purple)](https://spring.io/projects/spring-ai)
+[![DeepSeek](https://img.shields.io/badge/DeepSeek-chat-orange)](https://www.deepseek.com/)
+[![通义千问](https://img.shields.io/badge/%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE-DashScope-blue)](https://dashscope.aliyun.com/)
+[![Vue 3](https://img.shields.io/badge/Vue-3-brightgreen)](https://vuejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-646cff)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+
+**👉 [GitHub 仓库](https://github.com/xiaoheizi8/crush-cupid) · ⭐ Star & 自部署，把 ta 请进浏览器**
 
 
 ---

@@ -81,6 +81,22 @@ In Claude Code, type:
 | `/progress` | Track relationship progression stage |
 | `/analyze` | Psychological analysis of your crush |
 
+### Advisor Mode
+
+> Simulator mode = *you talk to them* (virtual). Advisor mode = *an advisor helps you analyze how to talk to them* (real-life strategy).
+
+Bridges the gap between virtual simulation and real-life action. Sarcastic but reliable, straight talk, no empty encouragement.
+
+| Command | Description |
+|---------|-------------|
+| `/advisor` | Enter advisor mode (free consultation) |
+| `/advisor report` | Relationship report — chat data, interaction frequency, signal analysis |
+| `/advisor strategy` | Next-action strategy based on current stage |
+| `/advisor prep` | Pre-action prep — topics, minefields, outfit tips |
+| `/advisor analyze` | Review past conversations, decode their signals |
+| `/advisor confession` | Confession plan — timing, method, scripts, fallbacks |
+| `/advisor reality` | Reality check — assess crush health, prevent over-indulgence |
+
 ---
 
 ## Examples
@@ -149,7 +165,14 @@ crush/
 │   ├── confession_simulator.md # Confession simulator
 │   ├── date_simulator.md       # Date simulator
 │   ├── progression_tracker.md  # Progression tracker
-│   └── crush_analyzer.md       # Psychological analyzer
+│   ├── crush_analyzer.md       # Psychological analyzer
+│   ├── advisor.md              # Advisor mode entry (persona + free consultation)
+│   ├── advisor_report.md       # Relationship report
+│   ├── advisor_strategy.md     # Strategy
+│   ├── advisor_prep.md         # Pre-action prep
+│   ├── advisor_analyze.md      # Conversation review
+│   ├── advisor_confession.md   # Confession planning
+│   └── advisor_reality.md      # Reality check
 └── tools/
     ├── wechat_parser.py        # WeChat chat log parser
     ├── qq_parser.py            # QQ chat log parser
