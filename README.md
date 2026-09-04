@@ -33,9 +33,9 @@
 > ![img_2.png](img_2.png)
 ---
 
-📣 **关于 crush-skills 的交流群：**
+📣 **关于 crush-skills 的交流群：申请备注crush-skills会拉你进群**
 
-![img.png](img.png)
+![img_3.png](img_3.png)
 &nbsp;
 
 提供暗恋对象的原材料（聊天记录、照片、社交媒体）加上你的主观描述  
@@ -315,6 +315,18 @@ crush-skills 的 **Java 全栈 Web 实现**。后端从 GitHub Raw 拉取 `SKILL
 
 
 ---
+## 💸 支持项目
+
+这个项目会持续维护，各种ai调试都需要token包括新的agent项目更进，不妨请我吃份拼好饭吧，人是铁，饭是钢。
+
+**赞助方式**（点击图片可放大扫码）：
+
+| 微信 | 支付宝 |
+|:--:| :---: |
+|  ![img_4.png](img_4.png)  | ![支付宝收款](alipay.jpg)![img_5.png](img_5.png) |
+
+
+**不想花钱？没关系！** 给这个仓库点个 ⭐ Star，或者把 Issue 回复得详细一点，就是对我最好的回报！
 
 ## 💡 致正在看文档的你
 
