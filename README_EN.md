@@ -97,6 +97,18 @@ Bridges the gap between virtual simulation and real-life action. Sarcastic but r
 | `/advisor confession` | Confession plan — timing, method, scripts, fallbacks |
 | `/advisor reality` | Reality check — assess crush health, prevent over-indulgence |
 
+### Mirror Mode
+
+> Simulator mode = *you talk to them*. Advisor mode = *how to talk to them*. Mirror mode = *who you are in their eyes*.
+
+It doesn't change them — it changes how you see yourself. The person in the mirror is the one they see every day.
+
+| Command | Description |
+|---------|-------------|
+| `/mirror` | Enter mirror mode (free consultation) |
+| `/mirror selfie` | Analysis — rebuild "you in their eyes", including how they'd describe you to friends |
+| `/mirror talk` | Mirror conversation — how your messages land in their eyes, with "re-shoot" rewrites |
+
 ---
 
 ## Examples
@@ -172,7 +184,8 @@ crush/
 │   ├── advisor_prep.md         # Pre-action prep
 │   ├── advisor_analyze.md      # Conversation review
 │   ├── advisor_confession.md   # Confession planning
-│   └── advisor_reality.md      # Reality check
+│   ├── advisor_reality.md      # Reality check
+│   ├── mirror.md               # Mirror mode (you in their eyes + mirror conversation)
 └── tools/
     ├── wechat_parser.py        # WeChat chat log parser
     ├── qq_parser.py            # QQ chat log parser

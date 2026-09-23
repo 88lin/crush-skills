@@ -40,6 +40,14 @@ allowed-tools: Read, Write, Edit, Bash
 
 子命令见「军师模式」一节。
 
+当用户说 `/mirror` 或以下任一内容时，进入**照镜子模式**：
+
+* `/mirror`
+* "ta眼中的我什么样" / "我在ta眼里是什么形象"
+* "帮我照照镜子" / "我这样说话ta会怎么看我"
+
+照镜子模式见「照镜子模式」一节。
+
 ---
 
 ## 工具使用规则
@@ -498,6 +506,36 @@ rm -rf crushes/{slug}
 
 ---
 
+## 照镜子模式（Mirror Mode）
+
+### 定位
+
+用 crush 的视角照镜子：重建「ta眼中的你」，并模拟你和 ta 对话时的那个「你」。
+
+> **模拟模式 = 你和 ta 说话**
+> **军师模式 = 军师帮你分析怎么和 ta 说话**
+> **照镜子模式 = 看看 ta 眼里的你是谁**
+
+照镜子不改变 ta，只改变你对自己的认知——镜子里的人，才是 ta 每天看到的人。
+
+### 命令体系
+
+| 命令 | 功能 | 读取 prompt |
+|------|------|------------|
+| `/mirror` | 进入照镜子模式（默认自由咨询） | `prompts/mirror.md` |
+| `/mirror selfie` | 画像分析：重建「ta眼中的你」，含她向朋友提起你时的样子 | `prompts/mirror.md` |
+| `/mirror talk` | 镜像对话模拟：逐句看你的话在 ta 眼里的样子，含「镜像重拍」 | `prompts/mirror.md` |
+
+### 核心规则
+
+1. **忠实成像**：用 ta 的视角，不是用户自我感觉；依据优先引用原话/原行为。
+2. **不评判对错**：只描述、不打分、不贴标签。
+3. **防两个极端**：不过度自我贬低，也不自恋加工。
+4. **抓大放小**：镜像重拍一次最多 3 句。
+5. **指向现实**：照完镜子导向真实互动（或 `/advisor strategy`）；过度照镜子求证而不行动时，主动点破并引导 `/advisor reality`。
+
+---
+
 # English Version
 
 # Crush.skill Creator (Claude Code Edition)
@@ -615,3 +653,17 @@ Same flow as Chinese version above. Generates:
 **Output style:** colloquial Chinese with sarcasm and humor, itemized answers with executable advice, every reply ends with a one-line "advisor summary" (`军师总结`).
 
 **Execution:** Read `prompts/advisor.md` for the persona; for sub-commands read the mapped prompt file and follow its flow. Data priority: user-pasted real records > `crushes/{slug}/` (persona/memory/meta/chats) > user narration. When data is insufficient, say so instead of making things up.
+
+### Mirror Mode
+
+Look at yourself through your crush's eyes — rebuild "who you are in their eyes" and simulate the "you" who talks to them.
+
+> Simulator mode = *you talk to them*. Advisor mode = *analyze how to talk to them*. Mirror mode = *see who you are in their eyes*.
+
+| Command | Function | Reference prompt |
+|---------|----------|------------------|
+| `/mirror` | Enter mirror mode (free consultation) | `prompts/mirror.md` |
+| `/mirror selfie` | Analysis — rebuild "you in their eyes", including how they'd describe you to friends | `prompts/mirror.md` |
+| `/mirror talk` | Mirror conversation — how each of your messages lands in their eyes, with "re-shoot" rewrites | `prompts/mirror.md` |
+
+**Core rules:** Faithful to their perspective (cite evidence, don't beautify). Describe, don't judge (no scoring/labels). Avoid both extremes (self-loathing and self-flattery). Keep rewrites to max 3 lines. Always steer back to real interaction or `/advisor` when the user keeps checking the mirror without acting.

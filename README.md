@@ -124,6 +124,18 @@ pip3 install -r requirements.txt
 | `/advisor confession` | 告白规划 — 时机、方式、话术、备选方案 |
 | `/advisor reality` | 现实检验 — 客观评估暗恋健康度，防止过度沉溺 |
 
+### 照镜子模式（Mirror Mode）
+
+> 模拟模式 = 你和 ta 说话｜军师模式 = 怎么和 ta 说话｜照镜子模式 = **看看 ta 眼里的你是谁**
+
+不改变 ta，只改变你对自己的认知——镜子里的人，才是 ta 每天看到的人。
+
+| 命令 | 说明 |
+|------|------|
+| `/mirror` | 进入照镜子模式，自由咨询 |
+| `/mirror selfie` | 画像分析 — 重建「ta眼中的你」，含她在朋友面前提起你的样子 |
+| `/mirror talk` | 镜像对话模拟 — 逐句看你的话在 ta 眼里的样子，附「镜像重拍」换说法 |
+
 ---
 
 ## 效果示例
@@ -200,7 +212,8 @@ crush/
 │   ├── advisor_prep.md        # 行动前准备
 │   ├── advisor_analyze.md     # 互动复盘
 │   ├── advisor_confession.md  # 告白规划
-│   └── advisor_reality.md     # 现实检验
+│   ├── advisor_reality.md     # 现实检验
+│   ├── mirror.md              # 照镜子模式（ta眼中的你 + 镜像对话模拟）
 └── tools/
     ├── wechat_parser.py       # 微信聊天记录解析
     ├── qq_parser.py           # QQ聊天记录解析
