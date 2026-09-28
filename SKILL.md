@@ -2,7 +2,7 @@
 name: create-crush
 description: Distill a crush into an AI Skill. Import chat history, photos, social media, generate Relationship Memory + Persona, with continuous evolution. | 把暗恋对象蒸馏成 AI Skill，导入聊天记录、照片、朋友圈，生成 Relationship Memory + Persona，支持持续进化。
 argument-hint: "[crush-name-or-slug]"
-version: 1.0.0
+version: 1.1.0
 user-invocable: true
 allowed-tools: Read, Write, Edit, Bash
 ---
@@ -352,6 +352,8 @@ user-invocable: true
         /{slug}-memory（回忆模式 — 帮你回忆那些事）
         /{slug}-persona（性格模式 — 仅人物性格）
 
+好奇 ta 眼中的你是什么样？输入 /mirror 照照镜子。
+
 想聊就聊，觉得哪里不像ta，直接说"ta不会这样"，我来更新。
 ```
 
@@ -525,6 +527,9 @@ rm -rf crushes/{slug}
 | `/mirror` | 进入照镜子模式（默认自由咨询） | `prompts/mirror.md` |
 | `/mirror selfie` | 画像分析：重建「ta眼中的你」，含她向朋友提起你时的样子 | `prompts/mirror.md` |
 | `/mirror talk` | 镜像对话模拟：逐句看你的话在 ta 眼里的样子，含「镜像重拍」 | `prompts/mirror.md` |
+| `/mirror gap` | 滤镜检测：双向镜，对照「你眼中的她」vs「她眼中的你」，让理想化滤镜现形 | `prompts/mirror.md` |
+| `/mirror draft` | 发送前预演：还没发的草稿快速过镜，30 秒给出「直接发/改一改/别发」 | `prompts/mirror.md` |
+| `/mirror growth` | 成长线：读取历史镜像存档，对比你眼中的自己如何变化 | `prompts/mirror.md` |
 
 ### 核心规则
 
@@ -533,6 +538,7 @@ rm -rf crushes/{slug}
 3. **防两个极端**：不过度自我贬低，也不自恋加工。
 4. **抓大放小**：镜像重拍一次最多 3 句。
 5. **指向现实**：照完镜子导向真实互动（或 `/advisor strategy`）；过度照镜子求证而不行动时，主动点破并引导 `/advisor reality`。
+6. **自动存档**：每次成像后自动追加到 `crushes/{slug}/mirrors/YYYY-MM-DD.md`（append-only），供 `/mirror growth` 追踪成长线；用户拒绝时跳过。
 
 ---
 
@@ -665,5 +671,8 @@ Look at yourself through your crush's eyes — rebuild "who you are in their eye
 | `/mirror` | Enter mirror mode (free consultation) | `prompts/mirror.md` |
 | `/mirror selfie` | Analysis — rebuild "you in their eyes", including how they'd describe you to friends | `prompts/mirror.md` |
 | `/mirror talk` | Mirror conversation — how each of your messages lands in their eyes, with "re-shoot" rewrites | `prompts/mirror.md` |
+| `/mirror gap` | Filter check — two-way mirror: "them in your eyes" vs "you in their eyes", expose idealization bias | `prompts/mirror.md` |
+| `/mirror draft` | Pre-send rehearsal — quickly mirror-check an unsent draft, verdict in seconds: send / tweak / don't | `prompts/mirror.md` |
+| `/mirror growth` | Growth line — read archived mirror reports, track how your reflection changes over time | `prompts/mirror.md` |
 
-**Core rules:** Faithful to their perspective (cite evidence, don't beautify). Describe, don't judge (no scoring/labels). Avoid both extremes (self-loathing and self-flattery). Keep rewrites to max 3 lines. Always steer back to real interaction or `/advisor` when the user keeps checking the mirror without acting.
+**Core rules:** Faithful to their perspective (cite evidence, don't beautify). Describe, don't judge (no scoring/labels). Avoid both extremes (self-loathing and self-flattery). Keep rewrites to max 3 lines. Always steer back to real interaction or `/advisor` when the user keeps checking the mirror without acting. Auto-archive each session's key conclusions to `crushes/{slug}/mirrors/YYYY-MM-DD.md` (append-only) for `/mirror growth`; skip if the user declines.
