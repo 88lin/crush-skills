@@ -84,7 +84,7 @@ pip3 install -r requirements.txt
 
 1. **基础信息**：花名/代号 + 基本信息 + 性格画像（3个问题）
 2. **原材料导入**：聊天记录、照片、社交媒体（可选）
-3. **分析生成**：Relationship Memory + Persona
+3. **分析生成**：Relationship Memory + Persona + 对话引擎（含还原度评级）
 4. **对话测试**：像ta一样跟你聊天
 
 ### 管理命令
@@ -138,6 +138,29 @@ pip3 install -r requirements.txt
 | `/mirror gap`    | 滤镜检测 — 双向镜：你眼中的她 vs 她眼中的你，让理想化滤镜现形    |
 | `/mirror draft`  | 发送前预演 — 没发的草稿快速过镜：直接发 / 改一改 / 别发      |
 | `/mirror growth` | 成长线 — 读取历史镜像存档，看你的镜像如何随时间变化           |
+
+### 反单调对话引擎（Anti-Monotony Engine）
+
+> 像 ta ≠ 每轮都说同一句话。v1.2 起，生成的 Skill 内置对话引擎，专治「ta 永远围着一个话题转、结尾总是同一句万能话」（比如"算了吧，还是去听歌吧"）。
+
+| 机制 | 作用 |
+|------|------|
+| 状态卡 | 内部记录当前话题、近 5 轮已用话题、已用口头禅、**未接的钩子** |
+| 话题配额 | 素材中出现 <3 次的细节禁止当锚点；口头禅 ≤1 次/8 轮；近 3 轮用过的锚点禁用 |
+| 三候选采样 | 每轮内部生成 3 条不同锚点的候选，按一致性+推进度+新颖度−重复惩罚选一条 |
+| 退化自检 | 句式/结尾/核心名词重复即重写；逃生句 5 轮内出现 2 次即禁用 |
+| 推进规则 | 每 3 轮至少 1 次主动抛话题；用户抛的钩子 2 轮内必须接住一次 |
+| 还原度分级 | `high/medium/low`，素材极少时切「倾听者模式」，不硬撑人设 |
+
+素材越多、还原度越高；素材只有一句话时，Skill 会坦白自己的还原度，而不是抓住唯一细节循环重复。
+
+**本地裁判脚本**（零依赖，纯标准库）：提示词规则容易"自觉违规"，所以配了两个可执行的裁判——
+`tools/speech_guard.py` 用字符 2-gram Jaccard 算重复度、识别结尾方式与逃生句，`tools/topic_ledger.py` 维护话题账本、查配额、给候选打分。
+每轮对 3 条候选各跑一次，`veto` 的直接淘汰，剩下的按脚本给的分数择优。自测：`python3 tools/speech_guard.py --selftest`。
+
+**阈值会自己学**：觉得"她还是老说这句"，直接说出口就行——纠正会被记成反馈信号，自动收紧重复判定；
+反过来"这句她真的会说"，会把该特征加进白名单永久豁免。单条纠正只推动一小步，不会一次抱怨就翻天。
+配置存在 `crushes/{slug}/adaptive.json`，说"恢复默认"即可重置。
 
 ---
 
@@ -239,6 +262,7 @@ crush/
 │   ├── memory_analyzer.md     # 关系记忆分析器
 │   ├── persona_builder.md     # 人物性格模板
 │   ├── persona_analyzer.md    # 性格行为分析器
+│   ├── conversation_engine.md # 反单调对话引擎（状态卡/配额/三候选采样）
 │   ├── merger.md              # 增量合并逻辑
 │   ├── correction_handler.md  # 对话纠正处理器
 │   ├── confession_simulator.md # 告白模拟器
@@ -259,7 +283,11 @@ crush/
     ├── social_parser.py       # 社交媒体内容解析
     ├── photo_analyzer.py     # 照片EXIF分析
     ├── version_manager.py     # 版本管理/回滚
-    └── skill_writer.py        # Skill文件管理
+    ├── skill_writer.py        # Skill文件管理
+    ├── session_state.py       # 会话状态读写（裁判脚本共用）
+    ├── speech_guard.py        # 文本层裁判：重复度/结尾方式/逃生句
+    ├── topic_ledger.py        # 账本层裁判：话题配额/候选打分/退化报告
+    └── feedback_tuner.py      # 阈值自适应：用纠正记录校准门槛
 ```
 
 ---
