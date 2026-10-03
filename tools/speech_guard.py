@@ -75,6 +75,10 @@ TRAILING_PUNCT_RE = re.compile(r"[\s，。！？、；：…—～~!?,.;:'\"）)
 QUESTION_RE = re.compile(r"[？?]")
 EXCLAIM_RE = re.compile(r"[！!]")
 ELLIPSIS_RE = re.compile(r"(\.{2,}|…)")
+SOFT_END_RE = re.compile(
+    r"(那你呢|你呢|早点睡|早点休息|路上小心|注意安全|吃了吗|多穿点|别熬夜"
+    r"|晚安|到了说|小心点|好好吃饭|记得吃饭|慢慢来)"
+)
 
 
 def normalize(text):
@@ -99,11 +103,13 @@ def jaccard(set_a, set_b):
 
 
 def end_style(text):
-    """结尾方式分类。"""
+    """结尾方式分类。关心式软收尾单独成类——它是温度，不是敷衍。"""
     stripped = TRAILING_PUNCT_RE.sub("", (text or "").strip())
     plain = normalize(stripped)
     if EMOJI_RE.search(stripped[-2:] if stripped else ""):
         return "表情"
+    if SOFT_END_RE.search(stripped[-10:] if stripped else ""):
+        return "关心"
     if QUESTION_RE.search(stripped[-3:] if stripped else ""):
         return "反问"
     if re.search(r"[吗么呢]$", plain):

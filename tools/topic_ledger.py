@@ -44,12 +44,40 @@ ANCHOR_COOLDOWN_TURNS = 3
 TOPIC_REPEAT_LOOKBACK = 2
 DEFAULT_LIMITS = {"强": {"window": 8, "limit": 1}, "中": {"window": 5, "limit": 1}}
 WEAK_EVIDENCE_THRESHOLD = 3
+TEMP_RANK = {"冷": 0, "温": 1, "热": 2}
+TEMP_ALIAS = {
+    "热": "热", "热情": "热", "热恋": "热",
+    "温": "温", "温柔": "温", "软": "温", "平常": "温",
+    "冷": "冷", "冷淡": "冷", "高冷": "冷",
+}
+DEFAULT_BASE_TEMP = "温"
 ADVICE = {
     "weak_anchor": "这个细节在素材里只出现过 %d 次，不能当回复锚点；换成用户刚说过的事",
     "anchor_cooldown": "这个锚点近 %d 轮刚用过，冷却中，换一个",
     "quota_exceeded": "「%s」在 %d 轮内已用 %d 次，超配额；这轮别提它",
     "topic_repeat": "话题和上一轮重复了，至少推进一步或换角度",
+    "temp_mismatch": "温度和 ta 的基线（%s）差太远且没有事由，出戏了；用 ta 平时的温度说话",
 }
+
+
+def normalize_temp(raw):
+    if not raw:
+        return None
+    return TEMP_ALIAS.get(raw.strip())
+
+
+def temperature_fit(candidate_temp, base_temp):
+    """温度契合度：同档 1.0，相邻 0.5，对立 0.0，未标注 0.8（不奖不罚）。"""
+    cand = normalize_temp(candidate_temp)
+    base = base_temp if base_temp in TEMP_RANK else DEFAULT_BASE_TEMP
+    if cand is None:
+        return 0.8, None
+    diff = abs(TEMP_RANK[cand] - TEMP_RANK[base])
+    if diff == 0:
+        return 1.0, None
+    if diff == 1:
+        return 0.5, None
+    return 0.0, "温度「%s」与 ta 基线「%s」对立且无事由" % (cand, base)
 
 
 def split_values(raw):
@@ -60,8 +88,8 @@ def split_values(raw):
 
 
 def parse_candidate(raw):
-    """解析 'topic=听歌|anchor=听歌|catch=笑死,行吧'。"""
-    result = {"topics": [], "anchors": [], "catch": []}
+    """解析 'topic=听歌|anchor=听歌|catch=笑死|temp=温'。"""
+    result = {"topics": [], "anchors": [], "catch": [], "temp": None}
     if not raw:
         return result
     for chunk in re.split(r"[|｜]", raw):
@@ -79,6 +107,8 @@ def parse_candidate(raw):
             result["anchors"].extend(values)
         elif key in ("catch", "catchphrase", "口头禅"):
             result["catch"].extend(values)
+        elif key in ("temp", "temperature", "温度"):
+            result["temp"] = value.strip()
     return result
 
 
@@ -263,8 +293,23 @@ def check_candidate(state, parsed, turn_no, adaptive=None):
     for anchor in anchors:
         uses = usage_in_window(history, "anchors", anchor, total_history or 1)
         repetition = max(repetition, min(1.0, 0.34 * uses))
+
+    base_temp = state.get("base_temp") or DEFAULT_BASE_TEMP
+    temp_fit, temp_note = temperature_fit(parsed.get("temp"), base_temp)
+    if temp_note:
+        violations.append({
+            "type": "temp_mismatch",
+            "level": "warn",
+            "detail": temp_note + "（若本轮确有事由可忽略此条）",
+        })
+        advice.append(ADVICE["temp_mismatch"] % base_temp)
+
+    levels = [v["level"] for v in violations]
+    verdict = "veto" if "veto" in levels else ("warn" if "warn" in levels else "ok")
+
     score = round(
-        0.5 * consistency + 0.3 * progression + 0.2 * novelty - 0.4 * repetition, 3)
+        0.4 * consistency + 0.25 * temp_fit + 0.2 * progression + 0.15 * novelty
+        - 0.4 * repetition, 3)
 
     return {
         "turn": turn_no,
@@ -272,10 +317,12 @@ def check_candidate(state, parsed, turn_no, adaptive=None):
         "score": score,
         "breakdown": {
             "consistency": consistency,
+            "temperature_fit": temp_fit,
             "progression": progression,
             "novelty": novelty,
             "repetition": round(repetition, 3),
         },
+        "base_temp": base_temp,
         "violations": violations,
         "advice": advice,
         "parsed": parsed,
@@ -332,6 +379,8 @@ def build_parser():
     parser.add_argument("--anchors", help="本轮实际使用的锚点，逗号分隔")
     parser.add_argument("--catch", help="本轮实际使用的口头禅，逗号分隔")
     parser.add_argument("--adaptive", help="自适应配置文件路径（默认 crushes/{slug}/adaptive.json）")
+    parser.add_argument("--base-temp", dest="base_temp", choices=["冷", "温", "热"],
+                        help="ta 的基线情绪温度（init 时写入，默认「温」，应与 persona 情感模式一致）")
     parser.add_argument("--selftest", action="store_true")
     return parser
 
@@ -380,8 +429,11 @@ def main():
         if not config:
             print("警告：未能从 persona 解析出引用表，配额配置为空（将退化为宽松校验）")
         state["quota_config"] = config
+        if args.base_temp:
+            state["base_temp"] = args.base_temp
         save_state(path, state)
-        emit({"action": "init", "state_file": path, "quota_config": config})
+        emit({"action": "init", "state_file": path, "base_temp": state.get("base_temp"),
+              "quota_config": config})
         return 0
 
     if args.action == "check":
