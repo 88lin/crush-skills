@@ -60,6 +60,7 @@ allowed-tools: Read, Write, Edit, Bash
 | 读取 MD/TXT 文件 | `Read` 工具 |
 | 解析微信聊天记录导出 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/wechat_parser.py` |
 | 解析 QQ 聊天记录导出 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/qq_parser.py` |
+| 说话人归因（两个解析器共用） | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/chat_attribution.py` |
 | 解析社交媒体内容 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/social_parser.py` |
 | 分析照片元信息 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/photo_analyzer.py` |
 | 写入/更新 Skill 文件 | `Write` / `Edit` 工具 |
@@ -133,15 +134,25 @@ allowed-tools: Read, Write, Edit, Bash
 
 #### 方式 A：聊天记录导出
 
-支持主流导出工具的格式：
+支持主流导出工具的格式。**解析器会为每条消息标注说话人**（`[ta]` / `[我]` / `[他人]`），这是下游 persona / memory 生成时唯一可信的归因依据：
 
 ```
 python3 ${CLAUDE_SKILL_DIR}/tools/wechat_parser.py \
   --file {path} \
   --target "{name}" \
+  --me "{你的昵称}" \
+  --alias "{ta的别名1}" --alias "{ta的别名2}" \
   --output /tmp/wechat_out.txt \
   --format auto
 ```
+
+* `--target`：ta 的昵称（必填）
+* `--me`：你自己的昵称（可选，可重复）。**强烈建议填**——不填时解析器只有在"库里只有一个非 ta 发言人"时才敢自动认定你是本人
+* `--alias`：ta 的其它昵称/马甲（可选，可重复），昵称含 emoji 或备注时用
+
+QQ 导出同理，用 `tools/qq_parser.py`（同样支持 `--target` / `--me` / `--alias`）。
+
+> **归因红线**：只有标注 `[ta]` 的内容可以写成 ta 的口头禅、兴趣、语言风格；`[我]` 的内容只能用于共同经历/互动模式；引用块（`「…」`）不计入任何一方。解析报告里的「归因抽检」和 `[未知]` 计数是核对用的——若出现未知发言人，先补 `--alias` 再生成，否则错误会静默污染 persona。
 
 支持的格式：
 * **WeChatMsg 导出**（推荐）：自动识别 txt/html/csv
